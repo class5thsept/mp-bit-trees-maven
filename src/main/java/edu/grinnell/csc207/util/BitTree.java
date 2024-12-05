@@ -149,6 +149,8 @@ public class BitTree {
       String value = "";
       int current = source.read();
       while (current != -1) {
+
+        //When everything is ready, set
         if ((char) current == '\n') {
           this.set(bits, value);
           current = source.read();
@@ -157,13 +159,20 @@ public class BitTree {
         }
         if ((char) current != ',') {
           bits = bits + (char) current;
+          current = source.read();
         }
         
+        //If it identifies a comma, it is time to get value
         if ((char) current == ',') {
           current = source.read();
-          value = Character.toString((char) current);
+          while ((char) current != '\n' && current != -1){
+      
+            value = value + Character.toString((char) current);
+            current = source.read();
+          }
+          
         }
-        current = source.read();
+        
       }
       
     } catch (Exception e) {
