@@ -7,7 +7,7 @@ import java.io.IOException;
 /**
  *
  *
- * @author Your Name Here
+ * @author Leonardo Alves Nunes
  * @author Samuel A. Rebelsky
  */
 public class BrailleAsciiTables {
@@ -205,6 +205,7 @@ public class BrailleAsciiTables {
    *
    */
   public static String toBraille(char letter) {
+
     return "";  // STUB
   } // toBraille(char)
 
@@ -223,7 +224,7 @@ public class BrailleAsciiTables {
         // We don't care if we can't close the stream.
       } // try/catch
     } // if
-    return "";  // STUB
+    return b2aTree.get(bits);  // STUB
   } // toAscii(String)
 
   /**
