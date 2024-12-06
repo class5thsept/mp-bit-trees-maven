@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.io.IOException;
 
 /**
- *
+ * Class that contains the translation among ASCII, Braille and Unicode.
  *
  * @author Leonardo Alves Nunes
  * @author Samuel A. Rebelsky
@@ -64,17 +64,17 @@ public class BrailleAsciiTables {
   // +---------------+
 
   /**
-   *
+   * Tree that relates ASCII to Braille.
    */
   static BitTree a2bTree = null;
 
   /**
-   *
+   * Tree that relates Braille to ASCII.
    */
   static BitTree b2aTree = null;
 
   /**
-   *
+   * Tree that relates Braille to Unicode.
    */
   static BitTree b2uTree = null;
 
@@ -87,7 +87,9 @@ public class BrailleAsciiTables {
   // +----------------+
 
   /**
-   *
+   * Convert to Braille by calling get.
+   * @param letter
+   * @return String
    */
   public static String toBraille(char letter) {
     String binaryString = "0" + Integer.toBinaryString(letter);
@@ -108,7 +110,9 @@ public class BrailleAsciiTables {
   } // toBraille(char)
 
   /**
-   *
+   * Convert to Ascii by calling get.
+   * @param bits
+   * @return String
    */
   public static String toAscii(String bits) {
     // Make sure we've loaded the braille-to-ASCII tree.
@@ -126,7 +130,10 @@ public class BrailleAsciiTables {
   } // toAscii(String)
 
   /**
-   *
+   * Convert to Unicode by calling get.
+   * Other conversions were required to handle hexadecimal code.
+   * @param bits
+   * @return the unicode string.
    */
   public static String toUnicode(String bits) {
     if (null == b2uTree) {

@@ -4,13 +4,20 @@ import java.io.PrintWriter;
 import edu.grinnell.csc207.util.BrailleAsciiTables;
 
 /**
+ * UI to convert into Unicode, ASCII or Braille.
  *
+ * @author Leonardo Alves Nunes.
  */
 public class BrailleASCII {
   // +------+--------------------------------------------------------
   // | Main |
   // +------+
 
+  /**
+   * Handles inputs to choose translation and call Table functions.
+   *
+   * @param args
+   */
   public static void main(String[] args) {
     PrintWriter pen = new PrintWriter(System.out, true);
     if (args.length == 2) {

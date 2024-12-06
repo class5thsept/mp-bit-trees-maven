@@ -13,31 +13,60 @@ public class BitTree {
   // +--------+------------------------------------------------------
   // | Fields |
   // +--------+
-
+  /**
+   * Root (starting point) of the tree.
+   */
   private BitTreeNode root;
+
+  /**
+   * Amount of levels in the tree.
+   */
   private int size;
   // +--------------+------------------------------------------------
   // | Constructors |
   // +--------------+
 
   /**
+   * Build a tree with a root.
    *
+   * @param n number of levels in the tree.
    */
   public BitTree(int n) {
     this.size = n;
     this.root = new BitTreeInteriorNode();
   } // BitTree(int)
-
   // +---------------+-----------------------------------------------
   // | Local helpers |
   // +---------------+
-
+  /**
+   * Recursive function to traverse all nodes printing them.
+   *
+   * @param node
+   * @param pen
+   */
+  public void dumpHelper(BitTreeNode node, PrintWriter pen) {
+    if (node.getLeft() instanceof BitTreeLeaf) {
+      pen.println(node.getLeft().getPath() + "," + node.getLeft().getValue());
+    } else if (node.getRight() instanceof BitTreeLeaf) {
+      pen.println(node.getRight().getPath() + "," + node.getRight().getValue());
+    } else {
+      if (node.getLeft() != null) {
+        dumpHelper(node.getLeft(), pen);
+      } // if
+      if (node.getRight() != null) {
+        dumpHelper(node.getRight(), pen);
+      } // if
+    } // if
+  } // dumpHelper(BitTreeNode node, PrintWriter pen)
   // +---------+-----------------------------------------------------
   // | Methods |
   // +---------+
 
   /**
+   * Follow a bath indicated by bits and set the leaf to value.
    *
+   * @param bits
+   * @param value
    */
   public void set(String bits, String value) {
     if (bits.length() != this.size) {
@@ -79,7 +108,10 @@ public class BitTree {
   } // set(String, String)
 
   /**
+   * Follow the path indicated by bits and return the value at the leaf.
    *
+   * @param bits
+   * @return the value stored in the leaf if the path is followed.
    */
   public String get(String bits) {
     if (bits.length() != this.size) {
@@ -119,29 +151,18 @@ public class BitTree {
   } // get(String, String)
 
   /**
+   * Main dump function that initializes the recursive by the root.
    *
+   * @param pen
    */
   public void dump(PrintWriter pen) {
     dumpHelper(this.root, pen);
   } // dump(PrintWriter)
 
-  public void dumpHelper(BitTreeNode node, PrintWriter pen) {
-    if (node.getLeft() instanceof BitTreeLeaf) {
-      pen.println(node.getLeft().getPath() + "," + node.getLeft().getValue());
-    } else if (node.getRight() instanceof BitTreeLeaf) {
-      pen.println(node.getRight().getPath() + "," + node.getRight().getValue());
-    } else {
-      if (node.getLeft() != null) {
-        dumpHelper(node.getLeft(), pen);
-      } // if
-      if (node.getRight() != null) {
-        dumpHelper(node.getRight(), pen);
-      } // if
-    } // if
-  } // dumpHelper(BitTreeNode node, PrintWriter pen)
-
   /**
+   * Reads the provided table to build the tree.
    *
+   * @param source
    */
   public void load(InputStream source) {
     try {
