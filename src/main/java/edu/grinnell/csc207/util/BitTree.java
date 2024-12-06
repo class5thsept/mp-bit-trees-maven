@@ -42,7 +42,7 @@ public class BitTree {
   public void set(String bits, String value) {
     if (bits.length() != this.size) {
       throw new IndexOutOfBoundsException("Inappropriate length or values other than 0 or 1.");
-    }
+    } // if
     BitTreeNode cur = this.root;
 
     for (int i = 0; i < bits.length() - 1; i++) {
@@ -50,18 +50,18 @@ public class BitTree {
         if (cur.getLeft() == null) {
           BitTreeNode newNode = new BitTreeInteriorNode();
           cur.setLeft(newNode);
-        }
+        } // if
         cur = cur.getLeft();
       } else if (bits.charAt(i) == '1') {
         if (cur.getRight() == null) {
           BitTreeNode newNode = new BitTreeInteriorNode();
           cur.setRight(newNode);
-        }
+        } // if
         cur = cur.getRight();
       } else {
         throw new IndexOutOfBoundsException("Inappropriate length or values other than 0 or 1.");
-      }
-    }
+      } // if-else
+    } // for
 
     if (bits.charAt(bits.length() - 1) == '0') {
       BitTreeNode newNode = new BitTreeLeaf(value);
@@ -75,7 +75,7 @@ public class BitTree {
       cur.setPath(bits);
     } else {
       throw new IndexOutOfBoundsException("Inappropriate length or values other than 0 or 1.");
-    }
+    } // if
   } // set(String, String)
 
   /**
@@ -84,7 +84,7 @@ public class BitTree {
   public String get(String bits) {
     if (bits.length() != this.size) {
       throw new IndexOutOfBoundsException("Inappropriate length or values other than 0 or 1.");
-    }
+    } // if
 
     BitTreeNode cur = root;
 
@@ -92,30 +92,30 @@ public class BitTree {
       if (bits.charAt(i) == '0') {
         if (cur.getLeft() == null) {
           throw new IndexOutOfBoundsException("This path is not set yet.");
-        }
+        } // if
         cur = cur.getLeft();
       } else if (bits.charAt(i) == '1') {
         if (cur.getRight() == null) {
           throw new IndexOutOfBoundsException("This path is not set yet.");
-        }
+        } // if
         cur = cur.getRight();
       } else {
         throw new IndexOutOfBoundsException("Inappropriate length or values other than 0 or 1.");
-      }
-    }
+      } // if-else
+    } // for
     if (bits.charAt(bits.length() - 1) == '0') {
       if (cur.getLeft() == null) {
         throw new IndexOutOfBoundsException("This path is not set yet.");
-      }
+      } // if
       return cur.getLeft().getValue();
     } else if (bits.charAt(bits.length() - 1) == '1') {
       if (cur.getRight() == null) {
         throw new IndexOutOfBoundsException("This path is not set yet.");
-      }
+      } // if
       return cur.getRight().getValue();
     } else {
       throw new IndexOutOfBoundsException("Inappropriate length or values other than 0 or 1.");
-    }
+    } // if-else
   } // get(String, String)
 
   /**
@@ -133,12 +133,12 @@ public class BitTree {
     } else {
       if (node.getLeft() != null) {
         dumpHelper(node.getLeft(), pen);
-      }
+      } // if
       if (node.getRight() != null) {
         dumpHelper(node.getRight(), pen);
-      }
-    }
-  }
+      } // if
+    } // if
+  } // dumpHelper(BitTreeNode node, PrintWriter pen)
 
   /**
    *
@@ -149,38 +149,28 @@ public class BitTree {
       String value = "";
       int current = source.read();
       while (current != -1) {
-
-        //When everything is ready, set
+        // When everything is ready, set
         if ((char) current == '\n') {
           this.set(bits, value);
           current = source.read();
           bits = "";
           value = "";
-        }
+        } // if
         if ((char) current != ',') {
           bits = bits + (char) current;
           current = source.read();
-        }
-        
-        //If it identifies a comma, it is time to get value
+        } // if
+        // If it identifies a comma, it is time to get value
         if ((char) current == ',') {
           current = source.read();
-          while ((char) current != '\n' && current != -1){
-      
+          while ((char) current != '\n' && current != -1) {
             value = value + Character.toString((char) current);
             current = source.read();
-          }
-          
-        }
-        
-      }
-      
+          } // while
+        } // if
+      } // while
     } catch (Exception e) {
       System.err.println(e);
-    }
-
-    
-    
+    } // try-catch
   } // load(InputStream)
-
 } // class BitTree

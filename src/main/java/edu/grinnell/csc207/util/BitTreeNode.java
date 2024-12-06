@@ -19,7 +19,12 @@ public interface BitTreeNode {
    */
   public String getValue();
 
+  /**
+   * 
+   * @return
+   */
   public String getPath();
+
   /**
    * 
    * @return
@@ -32,5 +37,9 @@ public interface BitTreeNode {
    */
   public void setRight(BitTreeNode newNode);
 
+  /**
+   * 
+   * @return
+   */
   public void setPath(String path);
 }
